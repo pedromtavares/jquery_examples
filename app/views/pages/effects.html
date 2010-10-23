@@ -1,0 +1,97 @@
+	<script>
+		$().ready(function () {		
+			$('#button').toggle(function(){
+				$('#div1').hide('slow');
+				$('#div2').show('slow');
+			}, function(){
+				$('#div2').hide('slow');
+				$('#div1').show('slow');
+			});
+			$('#button2').toggle(function(){
+				$('#div3').fadeOut('slow');
+				$('#div4').fadeIn('slow');
+			}, function(){
+				$('#div4').fadeOut('slow');
+				$('#div3').fadeIn('slow');
+			});
+			
+			
+			$('#link').click(function(){
+				$('#extra').slideToggle('slow');
+			});		
+			
+			
+			$('#animate').click(function(){
+				$('#block').animate({height: '+=20px'}, 'slow')
+				.animate({width: '+=5px'}, 'fast')
+				.css('background-color', 'grey');
+			});
+			$('#animate2').click(function(){
+				$('#block2').animate({height: '+=20px'}, 'slow')
+				.animate({width: '+=5px'}, 'fast')
+				.queue(function(){
+					$(this).css('background-color', 'grey')
+					.dequeue();
+				});
+			});
+			$('#animate3').click(function(){
+				$('#block3').animate({height: '+=20px'}, 'slow')
+				.animate({width: '+=5px'}, 'fast', function(){
+					$('#block3').css('background-color', 'grey');
+				});
+			});
+		});
+	</script>
+	
+	<style>
+		.example{width:250px;border:1px solid}
+		.highlight{background-color:yellow}
+		.block1{width:100px;height:20px;border: 1px solid;}
+		.hidden{display:none}
+	</style>
+	
+	<h1>Effects Examples</h1>
+	
+	<p>All Javascript code and CSS code are inserted at the top of the page. Below are all HTML markup being modified via jQuery.</p>
+	
+	<h2>Show and hide</h2>
+	<div class="example">
+		<input type="button" id="button" value="Switch divs"/>
+		<div class="block1" id="div1">div1</div><div class="hidden block1" id="div2">div2</div>
+	</div>
+	<hr/>
+		
+	<h2>Fade in and out</h2>
+	<div class="example">
+		<input type="button" id="button2" value="Switch fading divs"/>
+		<div class="block1" id="div3">div3</div><div class="hidden block1" id="div4">div4</div>
+	</div>
+	<hr/>
+
+	<h2>Use of slideToggle()</h2>
+	<div class="example">
+		<a href="javascript:void(0)" id="link"> Read more</a>
+		<div class="hidden block1" id="extra">blablabla</div>
+	</div>
+	<hr/>
+
+	<h2>Unqueued animation</h2>
+	<div class="example">
+		<input type="button" id="animate" value="I shall animate"/>
+		<div class="block1" id="block"></div>
+	</div>
+	<hr/>
+	
+	<h2>Queued animation</h2>
+	<div class="example">
+		<input type="button" id="animate2" value="I shall queue"/>
+		<div class="block1" id="block2"></div>
+	</div>
+	<hr/>
+	
+	<h2>Queued animation via callbacks</h2>
+	<div class="example">
+		<input type="button" id="animate3" value="I shall queue with callbacks"/>
+		<div class="block1" id="block3"></div>
+	</div>
+	<hr/>

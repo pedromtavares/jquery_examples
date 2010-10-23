@@ -1,0 +1,157 @@
+<html>
+	<head>
+		<script language="javascript" type="text/javascript" src="jquery.js"></script>
+	</head>
+	
+	<script>
+		$().ready(function () {				
+			$('#item').click(function(){
+				$(this).toggleClass('highlight');
+			});
+			$('#item2').hover(function(){
+				$(this).addClass('highlight');
+			}, function(){
+				$(this).removeClass('highlight');
+			});
+			
+			
+			$('fieldset').bind('verify', function(){
+				$(this).children('input[type=text]').each(function(index,child){
+					if ($(child).val().length > 5){
+						$(child).addClass('highlight');
+					}else{
+						$(child).removeClass('highlight');
+					}
+				});
+			});
+			$('#submit').click(function(){
+				$('fieldset').trigger('verify');
+			});
+			$('fieldset input[type=text]').keyup(function(){
+				$('fieldset').trigger('verify');
+			});
+			
+			
+			$('#outer').click(function(event){
+				if (event.target == this) {
+					$('#outer .button').toggleClass('hidden');
+				}
+			});
+			$('#outer2').click(function(){
+				alert('You clicked the div!');
+			});
+			$('#outer2 .button').click(function(event){
+				alert('Button clicked!');
+				event.stopPropagation();
+			});
+			
+			
+			$('#items').click(function(event){
+				var foo = event.target.id.split('-')[0];
+				if (foo == 'item'){
+					alert('An item was clicked!');
+				}
+			});
+			
+			
+			$('#some-item').bind('click.alert', function(){
+				alert('hi');
+			});
+			$('#some-item .sub').bind('click.show', function(){
+				$('#some-item').unbind('click.alert');
+				$(this).toggleClass('highlight');
+			});
+			
+			
+			var alertHandler = function(){
+				alert('hi');
+			}
+			$('#some-item').click(alertHandler);
+			$('#some-item .sub').click(function(){
+				$('#some-item').unbind('click', alertHandler);
+				$(this).addClass('highlight');
+			});
+			$('#restore').click(function(){
+				$('#some-item').click(alertHandler);
+			});
+			
+		});
+	</script>
+	
+	<style>
+		.example{width:250px;border:1px solid}
+		.highlight{background-color:yellow}
+		.hidden{display:none}
+	</style>
+	
+	<h1>Events Examples</h1>
+	
+	<p>All Javascript code and CSS code are inserted at the top of the page. Below are all HTML markup being modified via jQuery.</p>
+	
+	<h2>Use of toggleClass()</h2>
+	<div class="example">
+		<input type="button" id="item" value="Click and I will change"/>
+	</div>
+	<hr/>
+	
+	<h2>Use of hover()</h2>
+	<div class="example">
+		<input type="button" id="item2" value="Hover and I will change"/>
+	</div>
+	<hr/>
+	
+	<h2>Custom events (use of bind() and trigger())</h2>
+	<div class="example">
+		<fieldset>
+			<input type="text"/><br/>
+			<input type="text"/><br/>
+			<input type="text"/><br/>
+			<input type="button" id="submit" value="Submit"/>
+		</fieldset>
+	</div>
+	<hr/>	
+	
+	<h2>Use of event.target</h2>
+	<div class="example">
+		<div id="outer">
+			Clicking on the buttons won't hide them, but clicking out here will!<br/>
+			<input type="button" class="button" value="Button 1"/>
+			<input type="button" class="button" value="Button 2"/>
+			<input type="button" class="button" value="Button 3"/>
+		</div>
+	</div>
+	<hr/>
+	
+	<h2>Use of event.stopPropagation()</h2>
+	<div class="example">
+		<div id="outer2">
+			Notice how clicking a button won't activate the 'you clicked the div' alert.<br/>
+			<input type="button" class="button" value="Button 1"/>
+			<input type="button" class="button" value="Button 2"/>
+			<input type="button" class="button" value="Button 3"/>
+		</div>
+	</div>
+	<hr/>
+	
+	<h2>Event delegation</h2>
+	<div class="example">
+		<div id="items">
+			<input type="button" id="item-1" value="Item 1"/>
+			<input type="button" id="item-2" value="Item 2"/>
+			<input type="button" id="item-3" value="Item 3"/>
+		</div>
+	</div>
+	<hr/>	
+	
+	<h2>Event namespacing</h2>
+	<div class="example">
+		<div id="some-item">
+			Click me and I will greet you.<br/>
+			<input type="button" class="sub" value="Disable alert"/>
+			<input type="button" class="sub" value="Disable alert"/>
+			<input type="button" id="restore" value="Restore"/>
+		</div>
+	</div>
+	<hr/>
+	
+</html>

@@ -1,0 +1,95 @@
+	<script>
+		$().ready(function () {	
+			$('#items > li:not(.sold)').addClass('highlight'); // will get all li elements directly descendant of the #items element that do NOT have the 'sold' class
+
+			$('a[href^=mailto:]').addClass('mailLink'); // will add an specific class for all links that start (^) with 'mailto:'. The [] syntax works with any attribute;
+
+			$('a[href$=.pdf]').addClass('pdfLink'); // same as above, but gets all links ending ($) with '.pdf'
+
+			$('tr:odd').addClass('odd'); // useful for alternating table rows, tr:even could also have been used.
+
+			$('td:contains(highlight)').addClass('highlight'); // will add the 'highlight' class to all td elements containight the 'highlight' text. This selector IS case sensitive.
+
+			$(':radio:checked').addClass('checked'); // easily handles checked radio buttons.
+
+			$('a.last').filter(function(){
+				return this.hostname && this.hostname != location.hostname;
+			}).addClass('external');
+		});
+	</script>
+	
+	<style>
+		.example{width:250px;border:1px solid}
+		.highlight{background-color:yellow}
+		.mailLink{background-color:lightblue}
+		.pdfLink{background-color:lightgreen}
+		.odd{background-color:grey}
+		.checked{width:100px}
+		.external{background-color:red}
+	</style>
+	
+	<h1>Selectors Examples</h1>
+	
+	<p>All Javascript code and CSS code are inserted at the top of the page. Below are all HTML markup being modified via jQuery.</p>
+	
+	<h2>Use of :not</h2>
+	<div class="example">
+		<ul id="items">
+			<li class="sold">Item 1</li>
+			<li class="available">Item 2</li>
+			<li class="not-available">Item 3</li>
+		</ul>
+	</div>
+	<hr/>
+	
+	<h2>Use of attribute selector with mailto:</h2>
+	<div class="example">
+		<a href="mailto:pedromateustavares@gmail.com">my e-mail</a><br/>
+		<a href="http://google.com">google page</a>
+	</div>
+	<hr/>
+	
+	<h2>Use of attribute selector with .pdf</h2>
+	<div class="example">
+		<a href="somefile.pdf">a pdf file(don't click, it doesn't exist ;P)</a><br/>
+		<a href="http://google.com">google page</a>
+	</div>
+	<hr/>
+	
+	<h2>Use of :odd</h2>
+	<div class="example">
+		<table border=1>
+			<tr><td>Row 1</td></tr>
+			<tr><td>Row 2</td></tr>
+			<tr><td>Row 3</td></tr>
+			<tr><td>Row 4</td></tr>
+		</table>
+	</div>
+	<hr/>
+	
+	<h2>Use of contains(highlight)</h2>
+	<div class="example">
+		<table border=1>
+			<tr><td>Row 1 highlight</td></tr>
+			<tr><td>Row 2</td></tr>
+			<tr><td>Row 3</td></tr>
+			<tr><td>Row 4 highlight</td></tr>
+		</table>
+	</div>
+	<hr/>
+	
+	<h2>Checked radio example</h2>
+	<div class="example">
+		<input type="radio" name="example">Option 1</input><br/>
+		<input type="radio" name="example" checked="checked">Option 2</input><br/>
+		<input type="radio" name="example">Option 3</input><br/>
+	</div>
+	<hr/>
+	
+	<h2>Use of filters to distinguish external links</h2>
+	<div class="example">
+		<a href="traversal.html" class="last">DOM traversing examples (local)</a><br/>
+		<a href="events.html" class="last">Event manipulation (local)</a><br/>
+		<a href="http://google.com" class="last">google page</a><br/>
+		<a href="http://pedromtavares.wordpress.com" class="last">my blog</a>
+	</div>

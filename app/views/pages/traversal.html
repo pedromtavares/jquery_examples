@@ -1,0 +1,104 @@
+	<script>
+		$().ready(function () {	
+			$('td:contains(highlight)').next().addClass('highlight'); // will style the element right after the selected one
+
+			$('td:contains(highlight-blue)').nextAll().addClass('highlight-blue'); // will style ALL elements after the selected one
+
+			$('td:contains(highlight-green)').nextAll().andSelf().addClass('highlight-green'); // will style ALL elements after the selected one AND the selected one
+			
+			$('#some-item').parent().addClass('highlight'); // will get the element right on top of the selected element in the DOM tree
+
+			$('#categories').children().addClass('highlight-blue'); // will get all elements that come below the selected element in the DOM tree
+
+			$('#products').children('.available').addClass('highlight-blue'); // you can optionally add a selector to be more specific on what you get back.
+
+			$('#some-post').siblings().addClass('highlight-green'); // will get all elements in the same level as the selected element in the DOM tree. You can also add a selector here.
+		});
+	</script>
+	
+	<style>
+		.example{width:250px;border:1px solid}
+		.highlight{background-color:yellow}
+		.highlight-blue{background-color:lightblue}
+		.highlight-green{background-color:lightgreen}
+	</style>
+	
+	<h1>DOM Traversing Examples</h1>
+	
+	<p>All Javascript code and CSS code are inserted at the top of the page. Below are all HTML markup being modified via jQuery.</p>
+	
+	<h2>Use of next()</h2>
+	<div class="example">
+		<table border=1>
+			<tr>
+				<td>First TD</td>
+				<td>Second TD highlight the next!</td>
+				<td>Third TD I got highlighted ;D</td>
+			</tr>
+		</table>
+	</div>
+	<hr/>
+	
+	<h2>Use of nextAll()</h2>
+	<div class="example">
+		<table border=1>
+			<tr>
+				<td>First TD</td>
+				<td>Second TD highlight-blue everyone after me!</td>
+				<td>Third TD I got highlighted ;D</td>
+				<td>Fourth TD me too \o/</td>
+			</tr>
+		</table>
+	</div>
+	<hr/>
+	
+	<h2>Use of nextAll() and andSelf()</h2>
+	<div class="example">
+		<table border=1>
+			<tr>
+				<td>First TD</td>
+				<td>Second TD highlight-green everyone after me and myself!</td>
+				<td>Third TD I got highlighted ;D</td>
+				<td>Fourth TD me too \o/</td>
+			</tr>
+		</table>
+	</div>
+	<hr/>
+	
+	<h2>Use of parent()</h2>
+	<div class="example">
+		<div id="items">
+			<div id="some-item">Item 1</div>
+			<div>Item 2</div>
+			<div>Item 3</div>
+		</div>
+	</div>
+	<hr/>
+	
+	<h2>Use of children()</h2>
+	<div class="example">
+		<div id="categories">
+			<div>Category 1</div>
+			<div>Category 2</div>
+			<div>Category 3</div>
+		</div>
+	</div>
+	<hr/>
+	
+	<h2>Use of children() with a selector</h2>
+	<div class="example">
+		<div id="products">
+			<div>Product 1</div>
+			<div class="available">Product 2</div>
+			<div>Product 3</div>
+		</div>
+	</div>
+	<hr/>
+	
+	<h2>Use of siblings()</h2>
+	<div class="example">
+		<div>Post 1</div>
+		<div>Post 2</div>
+		<div id="some-post">Post 3</div>
+	</div>
+	<hr/>
